@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/blueimp-gallery.min.css">
+		<link rel="stylesheet" href="css/jquery.fileupload.css">
+		<link rel="stylesheet" href="css/jquery.fileupload-ui.css">
+		<noscript><link rel="stylesheet" href="css/jquery.fileupload-noscript.css"></noscript>
+		<noscript><link rel="stylesheet" href="css/jquery.fileupload-ui-noscript.css"></noscript>
+	</head>
+	<body>
+        <div id="navBar">
+        <div id="upload">Upload</div>
+        <div id="treeView">Tree View</div>
+        </div>
+
+		<div id="container">
+ 
+    		<form id="fileupload" action="/server/php" method="POST" enctype="multipart/form-data">
+        	<!-- Redirect browsers with JavaScript disabled to the origin page -->
+        	<noscript><input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/"></noscript>
+       
+		    <div class="row fileupload-buttonbar">
+		        <div class="col-lg-7">
+		                
+		    	    <span class="btn btn-success fileinput-button">
+		                <i class="glyphicon glyphicon-plus"></i>
+		                    <span>Add files</span>
+		                    	<input type="file" name="files[]" multiple>
+		        	       	</span>
+		                	<button type="submit" class="btn btn-primary start">
+		                    	<i class="glyphicon glyphicon-upload"></i>
+		                    <span>Upload</span>
+		                	</button>
+		                	<button type="reset" class="btn btn-warning cancel">
+		                    	<i class="glyphicon glyphicon-ban-circle"></i>
+		                    <span>Cancel</span>
+		                	</button>
+		                	<button type="button" class="btn btn-danger delete">
+		                    	<i class="glyphicon glyphicon-trash"></i>
+		                    <span>Delete</span>
+		                	</button>
+		                
+		            <!-- The global file processing state -->
+		            <span class="fileupload-process"></span>
+		        </div>
+		        <!-- The global progress state -->
+		        <div class="col-lg-5 fileupload-progress fade">
+		        <!-- The global progress bar -->
+		            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+		                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+		                	</div>
+		                	<!-- The extended global progress state -->
+		                	<div class="progress-extended">&nbsp;</div>
+		            </div>
+		        </div>
+		        <!-- The table listing the files available for upload/download -->
+		        <div id=tableForFiles><table id="filewindow" role="presentation" class="table table-striped"><tbody class="files"></tbody></table></div>
+		    </form>
+		    <br>
+		    
+		</div>
+		<!-- The blueimp Gallery widget -->
+		<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+	    	<div class="slides"></div>
+	   			<h3 class="title"></h3>
+	    		<a class="prev">‹</a>
+	    		<a class="next">›</a>
+	    		<a class="close">×</a>
+	    		<a class="play-pause"></a>
+	    		<ol class="indicator"></ol>
+			</div>
+		<div id="page" class="view">
+		</div>
+		<div id="pageContainer"></div>
+		<div id="addProjectManager" class="projectManager">
+		    <span id="closeAddProjectManager">Close</span>
+		    <div class="projectFiles"><ul class="projectList"></ul></div>
+		    <button class="btn" id="loadProject">Load Project</button>
+		    <button class="btn" id="deleteProject">Delete Project</button>
+		</div>
+		<div id="saveProjectManager" class="projectManager">
+			<span id="closeSaveProjectManager">Close</span>
+			<div class="projectFiles"><ul class="projectList"></ul></div>
+			<input type="text" id="projectName">
+			<button class="btn" type="button" id="saveProject">Save Project</button>
+		</div>
+		<div id="backAnim"></div>
+		<div id="forwAnim"></div>
+		<div id="tools">
+			<form id="toolbox">
+				<p id="imageDetails"></p>
+ 				<label for="topPos" id="topInput">Top:</label><input id="topPos" type="text" name="top" value="0">
+				<label for="leftPos" id="leftInput">Left:</label><input id="leftPos" type="text" name="left" value="0"><br>
+				<label for="duration" id="durationInput">Duration:</label><input id="duration" type="text" value="1"><br>
+                <label for="delayDuration" id="delayInput">Delay:</label><input id="delayDuration" type="text" value="0"><br>
+                <label for="transparency" id="opacityInput">Opacity:</label><input id="transparency" type="text" value="1"><br>
+                <label for="width" id="widthInput">Width:</label><input id="width" type="text" value="0"><br>
+                <label for="height" id="heightInput">Height:</label><input id="height" type="text" value="0"><br>
+				<button class="btn setState" type="button">Set State</button>
+				<button class="btn previewPage" type="button">Preview Page</button><br>
+				<button class="btn loadProjectButton" type="button">Load Project</button>
+				<button class="btn saveProjectButton" type="button">Save Project</button><br>
+				
+				
+			</form>
+			<span id="currentPosLabel">Current Position:</span>
+			<span id="currentPos">X: 0 Y: 0</span> 
+        	
+			
+		</div>
+
+		<div id="fileList">
+			<ul class="treeView">
+				<ul class="pageTree">
+					<li class="addPage">Add Page</li>
+				</ul>
+			</ul>
+		</div>
+		
+		<div id="unclickable">
+			<div id="filePreview">
+				<span id='closePreview'>Close</span>
+				<ul id="imageTile"></ul>
+				<button id="addToTree" class="btn" type="button">Add to click</button>
+			</div>
+		</div>
+		<!-- The template to display files available for upload -->
+
+		<script id="template-upload" type="text/x-tmpl">
+		{% for (var i=0, file; file=o.files[i]; i++) { %}
+		    <tr class="template-upload fade">
+		        <td>
+		            <span class="preview"></span>
+		        </td>
+		        <td>
+		            <p class="name">{%=file.name%}</p>
+		            <strong class="error text-danger"></strong>
+		        </td>
+		        <td>
+		            <p class="size">Processing...</p>
+		            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+		        </td>
+		        <td>
+		            {% if (!i && !o.options.autoUpload) { %}
+		                <button class="btn btn-primary start" disabled>
+		                    <i class="glyphicon glyphicon-upload"></i>
+		                    <span>Start</span>
+		                </button>
+		            {% } %}
+		            {% if (!i) { %}
+		                <button class="btn btn-warning cancel">
+		                    <i class="glyphicon glyphicon-ban-circle"></i>
+		                    <span>Cancel</span>
+		                </button>
+		            {% } %}
+		        </td>
+		    </tr>
+		{% } %}
+		</script>
+		<!-- The template to display files available for download -->
+
+		<script id="template-download" type="text/x-tmpl">
+		{% for (var i=0, file; file=o.files[i]; i++) { %}
+		    <tr class="template-download fade">
+		        <td>
+		            <span class="preview">
+		                {% if (file.thumbnailUrl) { %}
+		                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img class="thumb" src="{%=file.thumbnailUrl%}"></a>
+		                {% } %}
+		            </span>
+		        </td>
+		        <td>
+		            <p class="name">
+		                {% if (file.url) { %}
+		                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+		                {% } else { %}
+		                    <span>{%=file.name%}</span>
+		                {% } %}
+		            </p>
+		            {% if (file.error) { %}
+		                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+		            {% } %}
+		        </td>
+		        <td>
+		            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+		        </td>
+		        <td>
+		            {% if (file.deleteUrl) { %}
+		                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+		                    <i class="glyphicon glyphicon-trash"></i>
+		                    <span>Delete</span>
+		                </button>
+		                <input type="checkbox" name="delete" value="1" class="toggle">
+		            {% } else { %}
+		                <button class="btn btn-warning cancel">
+		                    <i class="glyphicon glyphicon-ban-circle"></i>
+		                    <span>Cancel</span>
+		                </button>
+		            {% } %}
+		        </td>
+		    </tr>
+		{% } %}
+		</script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.ui.custom.min.js"></script>
+		<script id="template-view" type="text/x-tmpl">
+			{% for (var i=0, file; file=o.files[i]; i++) { %}
+	         	{% var filename=file.name;
+	         		filename=filename.substr(0,filename.length-4);
+	         		filename=filename.replace(' ','_');
+	         		filename=filename.replace('(',"");
+	         	    filename=filename.replace(')',"");
+	         		 %}  
+	 		<img id="{%=filename.replace(' ','_')%}" class="pageImg template-view" src="{%=file.url%}" >
+
+	 		{% } %}
+
+	 	</script>
+	 	<script src="js/Editor.js"></script>
+		<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+		<script src="js/jquery.ui.widget.js"></script>
+		<!-- The Templates plugin is included to render the upload/download listings -->
+		<script src="js/tmpl.min.js"></script>
+		<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+		<script src="js/load-image.min.js"></script>
+		<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+		<script src="js/canvas-to-blob.min.js"></script>
+		<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+		<script src="js/bootstrap.min.js"></script>
+		<!-- blueimp Gallery script -->
+		<script src="js/jquery.blueimp-gallery.min.js"></script>
+		<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+		<script src="js/jquery.iframe-transport.js"></script>
+		<!-- The basic File Upload plugin -->
+		<script src="js/jquery.fileupload.js"></script>
+		<!-- The File Upload processing plugin -->
+		<script src="js/jquery.fileupload-process.js"></script>
+		<!-- The File Upload image preview & resize plugin -->
+		<script src="js/jquery.fileupload-image.js"></script>
+		<!-- The File Upload audio preview plugin -->
+		<script src="js/jquery.fileupload-audio.js"></script>
+		<!-- The File Upload video preview plugin -->
+		<script src="js/jquery.fileupload-video.js"></script>
+		<!-- The File Upload validation plugin -->
+		<script src="js/jquery.fileupload-validate.js"></script>
+		<!-- The File Upload user interface plugin -->
+		<script src="js/jquery.fileupload-ui.js"></script>
+		<!-- The main application script -->
+		<script src="js/main.js"></script>
+
+		<script src="js/jquery.velocity.js"></script>
+		<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
+		<!--[if (gte IE 8)&(lt IE 10)]>
+		<script src="js/cors/jquery.xdr-transport.js"></script>
+		<![endif]-->
+	</body> 
+</html>

@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+html{
+	background-color: rgba(0,0,0,0.8);
+}
+
+#backAnim,#forwAnim{
+ 	background: rgba(0,0,0,0);
+ 	width:324px;
+ 	height:800px;
+ 	position: absolute;
+ 	z-index:2;
+ 	margin-top: 5px;
+ 	display:none;
+ }
+
+
+#page{display:block;
+	background-color: #000;
+	position:absolute;
+	margin-left: 351px;
+	margin-top: 5px;
+	width:648px;
+    height:600px;
+	
+}
+
+body{background-color: #333;
+}
+
+
+#pageContainer{
+	display:block;
+	background-color: #FFF;
+	position:absolute;
+	margin-left: 339px;
+	margin-top: 5px;
+	width:648px;
+    height:800px;
+}
+
+.page{
+	display:none;
+	background-color: #000;
+	position:absolute;
+	width:648px;
+    height:800px;
+}
+
+
+.pageImg{
+	display:none;
+	position: absolute;
+}

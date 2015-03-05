@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<!-- saved from url=(0017)http://localhost/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+
+		<link rel="stylesheet" href="http://localhost/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://localhost/css/style.css">
+		<link rel="stylesheet" href="http://localhost/css/blueimp-gallery.min.css">
+		<link rel="stylesheet" href="http://localhost/css/jquery.fileupload.css">
+		<link rel="stylesheet" href="http://localhost/css/jquery.fileupload-ui.css">
+		<noscript>&lt;link rel="stylesheet" href="css/jquery.fileupload-noscript.css"&gt;</noscript>
+		<noscript>&lt;link rel="stylesheet" href="css/jquery.fileupload-ui-noscript.css"&gt;</noscript>
+	</head>
+	<body>
+        <div id="navBar">
+        <div id="upload">Upload</div>
+        <div id="treeView">Tree View</div>
+        </div>
+
+		<div class="container">
+ 
+    		<form id="fileupload" action="http://localhost/server/php" method="POST" enctype="multipart/form-data" class="">
+        	<!-- Redirect browsers with JavaScript disabled to the origin page -->
+        	<noscript>&lt;input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/"&gt;</noscript>
+       
+		    <div class="row fileupload-buttonbar">
+		        <div class="col-lg-7">
+		                
+		    	    <span class="btn btn-success fileinput-button">
+		                <i class="glyphicon glyphicon-plus"></i>
+		                    <span>Add files</span>
+		                    	<input type="file" name="files[]" multiple="">
+		        	       	</span>
+		                	<button type="submit" class="btn btn-primary start">
+		                    	<i class="glyphicon glyphicon-upload"></i>
+		                    <span>Upload</span>
+		                	</button>
+		                	<button type="reset" class="btn btn-warning cancel">
+		                    	<i class="glyphicon glyphicon-ban-circle"></i>
+		                    <span>Cancel</span>
+		                	</button>
+		                	<button type="button" class="btn btn-danger delete">
+		                    	<i class="glyphicon glyphicon-trash"></i>
+		                    <span>Delete</span>
+		                	</button>
+		                
+		            <!-- The global file processing state -->
+		            <span class="fileupload-process"></span>
+		        </div>
+		        <!-- The global progress state -->
+		        <div class="col-lg-5 fileupload-progress fade">
+		        <!-- The global progress bar -->
+		            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+		                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+		                	</div>
+		                	<!-- The extended global progress state -->
+		                	<div class="progress-extended">&nbsp;</div>
+		            </div>
+		        </div>
+		        <!-- The table listing the files available for upload/download -->
+		        <table id="filewindow" role="presentation" class="table table-striped"><tbody class="files"><tr class="template-download fade in">
+		        <td>
+		            <span class="preview">
+		                
+		                    <a href="./localhost_files/3(1).png" title="3.png" download="3.png" data-gallery=""><img src="./localhost_files/3.png"></a>
+		                
+		            </span>
+		        </td>
+		        <td>
+		            <p class="name">
+		                
+		                    <a href="./localhost_files/3(1).png" title="3.png" download="3.png" data-gallery="">3.png</a>
+		                
+		            </p>
+		            
+		        </td>
+		        <td>
+		            <span class="size">64.77 KB</span>
+		        </td>
+		        <td>
+		            
+		                <button class="btn btn-danger delete" data-type="DELETE" data-url="http://localhost/server/php/?file=3.png">
+		                    <i class="glyphicon glyphicon-trash"></i>
+		                    <span>Delete</span>
+		                </button>
+		                <input type="checkbox" name="delete" value="1" class="toggle">
+		            
+		        </td>
+		    </tr><tr class="template-download fade in">
+		        <td>
+		            <span class="preview">
+		                
+		                    <a href="./localhost_files/4(1).png" title="4.png" download="4.png" data-gallery=""><img src="./localhost_files/4.png"></a>
+		                
+		            </span>
+		        </td>
+		        <td>
+		            <p class="name">
+		                
+		                    <a href="./localhost_files/4(1).png" title="4.png" download="4.png" data-gallery="">4.png</a>
+		                
+		            </p>
+		            
+		        </td>
+		        <td>
+		            <span class="size">67.87 KB</span>
+		        </td>
+		        <td>
+		            
+		                <button class="btn btn-danger delete" data-type="DELETE" data-url="http://localhost/server/php/?file=4.png">
+		                    <i class="glyphicon glyphicon-trash"></i>
+		                    <span>Delete</span>
+		                </button>
+		                <input type="checkbox" name="delete" value="1" class="toggle">
+		            
+		        </td>
+		    </tr></tbody></table>
+		    </form>
+		    <br>
+		    
+		</div>
+		<!-- The blueimp Gallery widget -->
+		<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+	    	<div class="slides"></div>
+	   			<h3 class="title"></h3>
+	    		<a class="prev">‹</a>
+	    		<a class="next">›</a>
+	    		<a class="close">×</a>
+	    		<a class="play-pause"></a>
+	    		<ol class="indicator"></ol>
+			</div>
+		<div id="page" class="view">
+			
+	         	  
+	 		<img id="3" class="drag template-view in ui-draggable" src="./localhost_files/3(1).png" style="position: absolute; top: 10px;">
+
+	 		
+	         	  
+	 		<img id="4" class="drag template-view in ui-draggable" src="./localhost_files/4(1).png" style="position: absolute; top: 10px;">
+
+	 		
+
+	 	</div>
+		<div id="tools">
+			<form id="toolbox">
+				
+ 				Top:<input id="topPos" type="text" name="top" value="0"><br>
+				Left:<input id="leftPos" type="text" name="left" value="0"><br>
+				Opacity:<input id="transparency" type="text" value="1"><br>
+                Duration:<input id="duration" type="text" value="1"><br>
+				<button class="btn setstate" type="button">Set</button><br>
+				<button class="btn reset" type="button">Reset</button><br>
+				<button class="btn animate" type="button">Animate</button>
+				<p>Current Position</p><p id="currentPos">X: 0 Y: 10</p>
+			</form>
+        
+			
+		</div>
+
+		<div id="fileList">
+			<ul class="clickView">
+				<li class="addClick">Add Click</li>
+			</ul>
+		</div>
+		
+		<div id="unclickable">
+			<div id="filePreview">
+				<span id="closePreview">Close</span>
+				<ul id="imageTile"></ul>
+				<button id="addToTree" class="btn" type="button">Add to click</button>
+			</div>
+		</div>
+		<!-- The template to display files available for upload -->
+
+		<script id="template-upload" type="text/x-tmpl">
+		{% for (var i=0, file; file=o.files[i]; i++) { %}
+		    <tr class="template-upload fade">
+		        <td>
+		            <span class="preview"></span>
+		        </td>
+		        <td>
+		            <p class="name">{%=file.name%}</p>
+		            <strong class="error text-danger"></strong>
+		        </td>
+		        <td>
+		            <p class="size">Processing...</p>
+		            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+		        </td>
+		        <td>
+		            {% if (!i && !o.options.autoUpload) { %}
+		                <button class="btn btn-primary start" disabled>
+		                    <i class="glyphicon glyphicon-upload"></i>
+		                    <span>Start</span>
+		                </button>
+		            {% } %}
+		            {% if (!i) { %}
+		                <button class="btn btn-warning cancel">
+		                    <i class="glyphicon glyphicon-ban-circle"></i>
+		                    <span>Cancel</span>
+		                </button>
+		            {% } %}
+		        </td>
+		    </tr>
+		{% } %}
+		</script>
+		<!-- The template to display files available for download -->
+
+		<script id="template-download" type="text/x-tmpl">
+		{% for (var i=0, file; file=o.files[i]; i++) { %}
+		    <tr class="template-download fade">
+		        <td>
+		            <span class="preview">
+		                {% if (file.thumbnailUrl) { %}
+		                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+		                {% } %}
+		            </span>
+		        </td>
+		        <td>
+		            <p class="name">
+		                {% if (file.url) { %}
+		                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+		                {% } else { %}
+		                    <span>{%=file.name%}</span>
+		                {% } %}
+		            </p>
+		            {% if (file.error) { %}
+		                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+		            {% } %}
+		        </td>
+		        <td>
+		            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+		        </td>
+		        <td>
+		            {% if (file.deleteUrl) { %}
+		                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+		                    <i class="glyphicon glyphicon-trash"></i>
+		                    <span>Delete</span>
+		                </button>
+		                <input type="checkbox" name="delete" value="1" class="toggle">
+		            {% } else { %}
+		                <button class="btn btn-warning cancel">
+		                    <i class="glyphicon glyphicon-ban-circle"></i>
+		                    <span>Cancel</span>
+		                </button>
+		            {% } %}
+		        </td>
+		    </tr>
+		{% } %}
+		</script>
+		<script src="./localhost_files/jquery.min.js"></script>
+		<script src="./localhost_files/jquery.ui.custom.min.js"></script>
+		<script id="template-view" type="text/x-tmpl">
+			{% for (var i=0, file; file=o.files[i]; i++) { %}
+	         	{% var filename=file.name;
+	         		filename=filename.substr(0,filename.length-4);
+	         		filename=filename.replace(' ','_');
+	         		filename=filename.replace('(',"");
+	         	    filename=filename.replace(')',"");
+	         		 %}  
+	 		<img id="{%=filename.replace(' ','_')%}" class="drag template-view" src="{%=file.url%}" >
+
+	 		{% } %}
+
+	 	</script>
+
+
+	 	<script>
+            
+            var clickNum=1;
+
+	 	    var imageList=[];
+
+	 	    var clickList=[];
+
+
+
+	 	    ImageListContainer={
+
+
+	 	    	getImagesFromPage: function(name){
+
+	 	    		imageList=[];
+	 	    		var images=$(name).find('img');
+
+	 	    		for(var i=0;i<images.length;i++){
+	 	    			imageList.push({id:images[i].id});
+
+	 	    		}
+	 	    	},
+
+	 	    	remove: function(name){
+		               
+		               	for (var i = 0; i < animationList.length; i++)
+		                    if(name== animationList[i].name)
+		                        imageList.splice(i,1);
+		          },
+
+		           
+		        //used to insert an animation object into an array at the end of array or at the specified index  
+		     	insert:function(item,index){
+		               	if (index==undefined)
+		                	imageList.push(item);
+		               	else
+		     		   		imageList.splice(index,0,item);
+		     	},
+
+		     	
+		        //to return the animation object for preview
+		     	previewAnimation: function(name){
+		     		
+		     		for (var i = 0; i < imageList.length; i++)
+		     			if(name== imageList[i].name)
+		     				return imageList[i];
+		     	},
+		     	//clear the animation array
+		     	clear: function(){
+		     		imageList=[];
+		     	}
+
+
+	 	    }
+
+			var animationList = [];
+
+			var state=1;
+
+			var AnimationObj={name:"default"+state,duration:0,top:0,left:0,opacity:1,rotateX:0,rotateY:0,rotateZ:0};
+		    
+		    AnimationContainer = {
+		        //used to remove an animation object from array using it's ID
+		        remove: function(name){
+		               
+		               	for (var i = 0; i < animationList.length; i++)
+		                    if(name== animationList[i].name)
+		                        animationList.splice(i,1);
+		          },
+
+		           
+		        //used to insert an animation object into an array at the end of array or at the specified index  
+		     	insert:function(item,index){
+		               	if (index==undefined)
+		                	animationList.push(item);
+		               	else
+		     		   	animationList.splice(index,0,item);
+		     	},
+
+		     	
+		        //to return the animation object for preview
+		     	previewAnimation: function(name){
+		     		
+		     		for (var i = 0; i < animationList.length; i++)
+		     			if(name== animationList[i].name)
+		     				return animationList[i];
+		     	},
+		     	//clear the animation array
+		     	clear: function(){
+		     		animationList=[];
+		     	}
+
+		 	}
+		 	
+		 	var startPosition;
+		 	var currentPosition=$('.drag').position();
+			
+			function setAnimation(){
+
+				$('#topPos').val(currentPosition.top);
+	            $('#leftPos').val(currentPosition.left);
+	            
+	            var x=parseInt(currentPosition.left,10);
+	            var y=parseInt(currentPosition.top,10);
+
+	            if(state==1){
+	            	startPosition={top:y,left:x};
+	            	
+	            }
+                AnimationContainer.insert({name:"default"+state,top:y,left:x,opacity:$('#transparency').val(),duration:parseInt($('#duration').val(),10)*1000});
+				state++;
+					 		
+			}
+
+			var previewState=1;
+
+			function animate(){
+               
+                if(previewState==1)
+                	$('.drag').css(startPosition);
+				var transition,time;
+
+				transition=AnimationContainer.previewAnimation("default"+previewState);
+				time=transition.duration;
+				console.log(transition);
+				$('.drag').velocity(transition,{duration:time,complete:function(){if(previewState<state) animate();}});
+				previewState++;
+
+			}
+
+		 	$(document).ready(function(){
+
+				$('#page').mousemove(function(){
+				
+					$('.drag').draggable({containment:"parent"}
+				);	
+			 	
+			 	$('.drag').mousemove(function(){
+			 		currentPosition = $(this).position();
+			 		$('#currentPos').html("X: "+currentPosition.left+" Y: "+currentPosition.top);
+			 		}
+		 		);
+		 	});
+
+		    });
+
+		    
+		    $('.setstate').click(function(){
+		       	
+		       	
+		       	setAnimation();
+		        	
+		        });
+
+		    $('.reset').click(function(){
+
+		    	AnimationContainer=[];
+		    	state=1;
+		    	previewState=1;
+			
+			});
+
+			$('.animate').click(function(){
+			    previewState=1;
+				animate();
+			
+			});
+
+			$('.addClick').click(function(){
+                $('.addClick').before('<li id="click'+clickNum+'" class="dir" '+clickNum+'"><input type="checkbox" class="clicklabel"><label for="clicklabel" >Click '+clickNum+'</label><ul class="clickTree"><li class="addFile">Add Files</li></ul><li>');
+                clickNum++;
+             
+               	$( ".dir" ).click(function(){
+					if($(this).find('.clicklabel').is(':checked')){
+					$(this).find('.clickTree').hide();
+					}
+					else
+			   		{
+			   		$(this).find('.clickTree').show();
+			   		}
+				});
+                
+              
+                  
+			});
+
+		var dog;
+
+		$('body').on("click",'.addFile',function(){
+             var that=$(this).parent();
+			$('#unclickable').fadeIn();
+			$('.prevImg').remove();
+
+                	ImageListContainer.getImagesFromPage('#page');
+                	for(var i=0;i<imageList.length;i++)
+                    {   
+                    	
+                		$('#imageTile').append('<li><div class="prevImg" id="tile'+i+'"></div></li>');
+                		$('#tile'+i).append($('#'+imageList[i].id).clone().addClass("tileImg"));
+                		$('#tile'+i).append($('<div class="tileName">'+imageList[i].id+'</div>'));
+                	}
+
+                	$('#addToTree').click(function(){
+                        var currentTree=that.find('li');
+                        dog=that;
+                        console.log(that);
+                		var tiles=$('.ui-selected').find('img');
+                		outer: for(var i=0;i<tiles.length;i++){
+                            var tileId=tiles[i].id;
+                			inner :for(var j=0;j<currentTree.length;j++){
+                				if(currentTree[j].id==tileId)
+                				continue outer;
+                			}
+                		that.prepend('<li id="'+tileId+'" class="clickTreeList">'+tileId+'</li>');
+                		}
+
+                	});
+                });
+
+		$('#closePreview').click(function(){
+			$('#unclickable').fadeOut();
+
+		});
+
+		$('#upload').click(function(){
+			$('#fileList').hide();
+			$('#container').show();
+		});
+
+		$('#treeView').click(function(){
+			$('#fileList').show();
+			$('#container').hide();
+		});
+
+		$('body').on('click','.clickTree',function(){
+			$('.clickTree').selectable();
+			$('.addFile').selectable({disabled:true});
+		});
+
+       
+
+       $('body').on('click','.addFile',function(){
+       	$('#imageTile').selectable();
+       });        
+        
+       
+    	
+
+	
+
+
+
+
+
+			
+
+
+	 	</script>
+		<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+		<script src="./localhost_files/jquery.ui.widget.js"></script>
+		<!-- The Templates plugin is included to render the upload/download listings -->
+		<script src="./localhost_files/tmpl.min.js"></script>
+		<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+		<script src="./localhost_files/load-image.min.js"></script>
+		<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+		<script src="./localhost_files/canvas-to-blob.min.js"></script>
+		<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+		<script src="./localhost_files/bootstrap.min.js"></script>
+		<!-- blueimp Gallery script -->
+		<script src="./localhost_files/jquery.blueimp-gallery.min.js"></script>
+		<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+		<script src="./localhost_files/jquery.iframe-transport.js"></script>
+		<!-- The basic File Upload plugin -->
+		<script src="./localhost_files/jquery.fileupload.js"></script>
+		<!-- The File Upload processing plugin -->
+		<script src="./localhost_files/jquery.fileupload-process.js"></script>
+		<!-- The File Upload image preview & resize plugin -->
+		<script src="./localhost_files/jquery.fileupload-image.js"></script>
+		<!-- The File Upload audio preview plugin -->
+		<script src="./localhost_files/jquery.fileupload-audio.js"></script>
+		<!-- The File Upload video preview plugin -->
+		<script src="./localhost_files/jquery.fileupload-video.js"></script>
+		<!-- The File Upload validation plugin -->
+		<script src="./localhost_files/jquery.fileupload-validate.js"></script>
+		<!-- The File Upload user interface plugin -->
+		<script src="./localhost_files/jquery.fileupload-ui.js"></script>
+		<!-- The main application script -->
+		<script src="./localhost_files/main.js"></script>
+
+		<script src="./localhost_files/jquery.velocity.js"></script>
+		<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
+		<!--[if (gte IE 8)&(lt IE 10)]>
+		<script src="js/cors/jquery.xdr-transport.js"></script>
+		<![endif]-->
+	 
+
+</body></html>
